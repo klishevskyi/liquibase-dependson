@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.liquibase.org/xml/ns/dbchangelog-ext/dependsOn"
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog-ext/dependsOn"
+            elementFormDefault="qualified">
+
+    <xsd:element name="dependsOn">
+        <xsd:complexType>
+            <xsd:attribute name="id" use="required"/>
+            <xsd:attribute name="author" use="required"/>
+            <xsd:attribute name="changeLogFile"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
