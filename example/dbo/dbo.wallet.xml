@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext/dependsOn"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.7.xsd">
+
+    <changeSet id="wallet-create" author="mikhail">
+        <preConditions>
+            <ext:dependsOn id="user-create" author="mikhail" changeLogFile="dbo.user.xml"/>
+        </preConditions>
+
+        <createTable schemaName="dbo" tableName="wallet">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints foreignKeyName="user_fk" references="dbo.user(id)"/>
+            </column>
+
+            <column name="balance" type="int"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
