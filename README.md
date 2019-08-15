@@ -1,3 +1,5 @@
+![CircleCI](https://circleci.com/gh/klishevskyi/liquibase-dependson.svg?style=svg&circle-token=07929ff755e3cae447b8703839ee5f7832bb6a60)
+
 Liquibase DependsOn Extension
 -----------------------------
 The extension provides the ability to declare dependencies between changeSets 
