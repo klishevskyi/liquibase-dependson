@@ -10,19 +10,45 @@ Installation
 Simply download the liquibase-dependson jar and add it to your classpath.
 
 Usage
------
-#### 1. Enable extension for `databaseChangeLog`:
+-------
+The extension allows you to organize migration files relative to the database structure, which can simplifies the long-term support of migrations.
+
+#### Common way to organize your changelogs is by major release 
+```
+db
+├── changelog
+│   ├── db.changelog-master.xml
+│   ├── db.changelog-1.0.xml
+│   ├── db.changelog-1.1.xml
+│   └── db.changelog-2.0.xml
+```
+
+#### Way to organize your changes regarding the database structure
+```
+db
+├── db.changelog-master.xml
+├── tables
+│   ├── dbo.basket.xml
+│   ├── dbo.discount.xml
+│   ├── dbo.product.xml
+│   ├── dbo.user.xml
+│   └── dbo.wallet.xml
+├── triggers
+```
+
+#### Enable extension for `db.changelog-master.xml`:
+_Ordering will be applied to child changeSets._
+
 ```xml
 <databaseChangeLog
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.7.xsd">
-    
+
     <!-- Enable depends on extension -->
     <property name="useDependsOnExtension" value="true"/>
 
-    <include file="changelog-1.0.xml"/>
-    <include file="changelog-2.0.xml"/>
+    <includeAll path="./tables"/>
 </databaseChangeLog>
 ```
 
@@ -43,6 +69,7 @@ Usage
     <changeSet id="user-table-adding-column" author="mikhail">
         <preConditions>
             <ext:dependsOn id="user-table-creating" author="mikhail" />
+            <ext:dependsOn id="product-table-creating" author="mikhail" changeLogFile="dbo.product.xml"/>
         </preConditions>
 
         <addColumn tableName="user">

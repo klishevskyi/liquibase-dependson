@@ -6,5 +6,5 @@
     <!-- Enable depends on extension -->
     <property name="useDependsOnExtension" value="true"/>
 
-    <includeAll path="./schema"/>
+    <includeAll path="./tables"/>
 </databaseChangeLog>
